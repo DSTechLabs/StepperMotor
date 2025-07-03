@@ -1,5 +1,5 @@
 
-# Stepper Motor Controller
+# Stepper Motor Class
 
 This is a single C++ class that provides full control of a stepper motor.
 
@@ -98,19 +98,19 @@ The default ramp value at startup is 5.
 
 ## How To Use
 
-Include the StepperMotorController .cpp and .h files in your firmware.
+Include the StepperMotor .cpp and .h files in your firmware.
 Decide which GPIO pins to use for Enable, Direction and Step signals to your driver board.
 The defaults are 2, 3 and 4 respectively.
 
-Instantiate a StepperMotorController as a global so the rest of your firmware can access it:
+Instantiate a StepperMotor as a global so the rest of your firmware can access it:
 
-    StepperMotorController MyMotor = StepperMotorController (enablePin, directionPin, stepPin);
+    StepperMotor MyMotor = StepperMotor (enablePin, directionPin, stepPin);
 
 Optionally, you can also specify one or two GPIO pins to use for Limit Switches:
 
-    StepperMotorController MyMotor = StepperMotorController (enablePin, directionPin, stepPin, lowerLimitSwitch, upperLimitSwitch);
+    StepperMotor MyMotor = StepperMotor (enablePin, directionPin, stepPin, lowerLimitSwitch, upperLimitSwitch);
 
-Once you have a StepperMotorController object, you will need to Enable the driver before
+Once you have a StepperMotor object, you will need to Enable the driver before
 motion can begin:
 
     setup()
@@ -156,7 +156,7 @@ LIMIT_SWITCH_UPPER  - Upper limit switch triggered
 
 ---
 All control can be performed either by directly calling methods or by executing
-a command string - from a UI for example.
+a command string - sent from a UI for example.
 
 Your firmware should normally wait until the motor is finished with a previous Rotate method/command
 before issuing a new Rotate command.  If a Rotate command is called while the motor is already
@@ -164,7 +164,7 @@ running, then the current rotation is interrupted and the new Rotate command is 
 the motor's current position.
 
 ## Class Methods
-See the `StepperMotorController.h` file for all methods.
+See the `StepperMotor.h` file for all methods.
 
 This class also has an `ExecuteCommand()` method to allow external interfaces to run the motor,
 say from a browser app or other UI.
